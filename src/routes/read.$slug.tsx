@@ -87,23 +87,21 @@ function Reader() {
       </div>
 
       <div className="panel mt-6 overflow-hidden p-1.5">
-        <object
-          data={`${book.url}#page=${page > 0 ? page : 1}`}
-          type="application/pdf"
+        <iframe
+          key={page}
+          src={`${book.url}#page=${page > 0 ? page : 1}`}
+          title={`${book.title} PDF reader`}
           className="h-[78vh] w-full rounded-lg bg-muted"
-          aria-label={`${book.title} PDF reader`}
-        >
-          <div className="grid h-[78vh] place-items-center px-6 text-center">
-            <p className="text-sm text-muted-foreground">
-              Your browser can&apos;t display this PDF inline.{" "}
-              <a href={book.url} target="_blank" rel="noreferrer" className="text-primary underline">
-                Open {book.title} in a new tab
-              </a>
-              .
-            </p>
-          </div>
-        </object>
+        />
+        <p className="px-3 py-2 text-xs text-muted-foreground">
+          Reader not loading?{" "}
+          <a href={book.url} target="_blank" rel="noreferrer" className="text-primary underline">
+            Open {book.title} in a new tab
+          </a>
+          .
+        </p>
       </div>
+
     </AppShell>
   );
 }
