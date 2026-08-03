@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LibraryRouteImport } from './routes/library'
+import { Route as SkillsRouteImport } from './routes/skills'
 import { Route as ReadSlugRouteImport } from './routes/read.$slug'
 
 const IndexRoute = IndexRouteImport.update({
@@ -23,6 +24,11 @@ const LibraryRoute = LibraryRouteImport.update({
   path: '/library',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SkillsRoute = SkillsRouteImport.update({
+  id: '/skills',
+  path: '/skills',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ReadSlugRoute = ReadSlugRouteImport.update({
   id: '/read/$slug',
   path: '/read/$slug',
@@ -32,30 +38,34 @@ const ReadSlugRoute = ReadSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/library': typeof LibraryRoute
+  '/skills': typeof SkillsRoute
   '/read/$slug': typeof ReadSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/library': typeof LibraryRoute
+  '/skills': typeof SkillsRoute
   '/read/$slug': typeof ReadSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/library': typeof LibraryRoute
+  '/skills': typeof SkillsRoute
   '/read/$slug': typeof ReadSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/library' | '/read/$slug'
+  fullPaths: '/' | '/library' | '/skills' | '/read/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/library' | '/read/$slug'
-  id: '__root__' | '/' | '/library' | '/read/$slug'
+  to: '/' | '/library' | '/skills' | '/read/$slug'
+  id: '__root__' | '/' | '/library' | '/skills' | '/read/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LibraryRoute: typeof LibraryRoute
+  SkillsRoute: typeof SkillsRoute
   ReadSlugRoute: typeof ReadSlugRoute
 }
 
@@ -75,6 +85,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LibraryRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/skills': {
+      id: '/skills'
+      path: '/skills'
+      fullPath: '/skills'
+      preLoaderRoute: typeof SkillsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/read/$slug': {
       id: '/read/$slug'
       path: '/read/$slug'
@@ -88,6 +105,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LibraryRoute: LibraryRoute,
+  SkillsRoute: SkillsRoute,
   ReadSlugRoute: ReadSlugRoute,
 }
 export const routeTree = rootRouteImport
