@@ -73,7 +73,8 @@ export const TRACKS: Track[] = [
   },
 ];
 
-export const trackById = (id: TrackId) => TRACKS.find((t) => t.id === id) ?? TRACKS[0];
+export const trackById = (id: TrackId): Track =>
+  TRACKS.find((t) => t.id === id) ?? (TRACKS[0] as Track);
 
 export type Book = {
   slug: string;
