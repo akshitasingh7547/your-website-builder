@@ -60,7 +60,7 @@ export function useMinuteLog() {
 export function useTodayBlocks() {
   const [done, setDone, ready] = useLocalState<BlockLog>("fd:blocks", {});
   const day = dateKey();
-  const blocks = WEEK_PLAN[new Date().getDay()];
+  const blocks = WEEK_PLAN[new Date().getDay()] ?? [];
   const doneToday = done[day] ?? [];
 
   const toggle = (index: number) =>
